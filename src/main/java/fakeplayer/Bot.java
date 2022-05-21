@@ -76,7 +76,7 @@ public class Bot {
 
         PlayerJoinEvent playerJoinEvent;
 
-        playerJoinEvent = paperJoinMessageFormat(entityPlayer, joinMessage);
+        playerJoinEvent = paperJoinMessageFormat(bukkitPlayer, joinMessage);
 
         Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
@@ -136,7 +136,7 @@ public class Bot {
 
         CraftPlayer craftPlayer = entityPlayer.getBukkitEntity();
 
-        playerQuitEvent = paperQuitMessageFormat(entityPlayer, craftPlayer.getPlayer());
+        playerQuitEvent = paperQuitMessageFormat(craftPlayer, craftPlayer.getPlayer());
 
         Bukkit.getPluginManager().callEvent(playerQuitEvent);
 
@@ -178,8 +178,8 @@ public class Bot {
         bukkitPlayer.setResourcePackStatus(status);
     }
 
-    public static PlayerJoinEvent paperJoinMessageFormat(ServerPlayer player, TranslatableComponent message) {
-        return new PlayerJoinEvent(Bukkit.getServer().getPlayer(player.getUUID()), PaperAdventure.asAdventure(message));
+    public static PlayerJoinEvent paperJoinMessageFormat(CraftPlayer player, TranslatableComponent message) {
+        return new PlayerJoinEvent(player.getPlayer(), PaperAdventure.asAdventure(message));
     }
 
     public static void playerInitialSpawnEvent(Player p) {
@@ -213,8 +213,8 @@ public class Bot {
         return chatMessage;
     }
 
-    public static PlayerQuitEvent paperQuitMessageFormat(ServerPlayer entityPlayer, Player player) {
-        return new PlayerQuitEvent(player, Component.translatable("multiplayer.player.left", NamedTextColor.YELLOW, PaperConfig.useDisplayNameInQuit ? player.displayName() : Component.text(player.getName())), entityPlayer.quitReason);
+    public static PlayerQuitEvent paperQuitMessageFormat(CraftPlayer entityPlayer, Player player) {
+        return new PlayerQuitEvent(player.getPlayer(), Component.translatable("multiplayer.player.left", NamedTextColor.YELLOW, PaperConfig.useDisplayNameInQuit ? player.displayName() : Component.text(player.getName())), entityPlayer.getHandle().quitReason);
     }
 }
 
