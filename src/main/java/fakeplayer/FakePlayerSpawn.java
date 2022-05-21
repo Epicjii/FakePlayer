@@ -13,7 +13,6 @@ public class FakePlayerSpawn implements CommandExecutor {
             @NotNull String label,
             @NotNull String[] args) {
 
-
         return FakePlayer.summon(args[0]);
     }
 }

@@ -18,15 +18,7 @@ public class FakePlayer {
         this.uuid = uuid;
         this.name = name;
     }
-    public static FakePlayer getFakePlayer(UUID uuid) {
-        for (FakePlayer player : fakePlayers) {
-            if (player.getUUID() == uuid) {
-                return player;
-            }
-        }
 
-        return null;
-    }
     public static FakePlayer getFakePlayer(String name) {
         for (FakePlayer player : fakePlayers) {
             if (player.getName().equals(name)) {

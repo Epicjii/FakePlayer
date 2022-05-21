@@ -16,10 +16,13 @@ public class FakePlayerSummon implements CommandExecutor {
             @NotNull String label,
             @NotNull String[] args) {
 
-        UUID botID = FakePlayer.getFakePlayer(args[0]).getUUID();
+        if (args.length == 1 && FakePlayer.getFakePlayer(args[0]) != null) {
+            UUID botID = FakePlayer.getFakePlayer(args[0]).getUUID();
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "tp " + botID + " " + sender.getName());
+            
+            return true;
+        }
 
-        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "tp " + botID + " " + sender.getName());
-
-        return true;
+        return false;
     }
 }

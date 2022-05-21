@@ -37,7 +37,7 @@ public final class FakePlayerPlugin extends JavaPlugin {
         getCommand("teleportbot").setExecutor(new FakePlayerSummon());
 
         try {
-            Files.createDirectory(Paths.get("plugins/FakePlayers/data"));
+            Files.createDirectories(Paths.get("plugins/FakePlayers/data"));
         }catch (FileAlreadyExistsException e) {
             Bukkit.getLogger().fine("data already exists");
 
