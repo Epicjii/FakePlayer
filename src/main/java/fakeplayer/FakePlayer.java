@@ -13,11 +13,11 @@ public class FakePlayer {
     private final String name;
     private Object entityPlayer;
 
+
     public FakePlayer(UUID uuid, String name) {
         this.uuid = uuid;
         this.name = name;
     }
-
     public static FakePlayer getFakePlayer(UUID uuid) {
         for (FakePlayer player : fakePlayers) {
             if (player.getUUID() == uuid) {
@@ -27,7 +27,6 @@ public class FakePlayer {
 
         return null;
     }
-
     public static FakePlayer getFakePlayer(String name) {
         for (FakePlayer player : fakePlayers) {
             if (player.getName().equals(name)) {
@@ -36,10 +35,6 @@ public class FakePlayer {
         }
 
         return null;
-    }
-
-    public static int getAmount() {
-        return fakePlayers.size();
     }
 
     public static List<FakePlayer> getFakePlayers() {
@@ -82,6 +77,4 @@ public class FakePlayer {
 
         return true;
     }
-
-
 }

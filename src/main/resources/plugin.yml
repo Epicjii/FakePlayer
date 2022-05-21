@@ -9,3 +9,6 @@ commands:
   remove:
     description: kill bot
     usage: /remove
+  teleportbot:
+    description: summons
+    usage: /teleportbot

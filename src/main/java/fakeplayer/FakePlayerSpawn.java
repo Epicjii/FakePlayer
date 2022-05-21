@@ -1,14 +1,11 @@
 package fakeplayer;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.UUID;
-
-public class FakePlayerSummon implements CommandExecutor {
+public class FakePlayerSpawn implements CommandExecutor {
     @Override
     public boolean onCommand(
             @NotNull CommandSender sender,
@@ -16,10 +13,7 @@ public class FakePlayerSummon implements CommandExecutor {
             @NotNull String label,
             @NotNull String[] args) {
 
-        UUID botID = FakePlayer.getFakePlayer(args[0]).getUUID();
 
-        Bukkit.getServer().dispatchCommand(sender, "tp " + botID + " " + sender.getName());
-
-        return true;
+        return FakePlayer.summon(args[0]);
     }
 }

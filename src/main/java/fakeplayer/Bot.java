@@ -54,19 +54,14 @@ public class Bot {
         entityPlayer.connection.connection.channel.close();
 
         AsyncPlayerPreLoginEvent asyncPreLoginEvent = new AsyncPlayerPreLoginEvent(fakePlayer.getName(), InetAddress.getLoopbackAddress(), fakePlayer.getUUID());
-        PlayerPreLoginEvent preLoginEvent = new PlayerPreLoginEvent(fakePlayer.getName(), InetAddress.getLoopbackAddress(), fakePlayer.getUUID());
 
         new Thread(() -> Bukkit.getPluginManager().callEvent(asyncPreLoginEvent)).start();
-        Bukkit.getPluginManager().callEvent(preLoginEvent);
 
         server.getPlayerList().load(entityPlayer);
 
         Location loc = bukkitPlayer.getLocation();
 
         entityPlayer.absMoveTo(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
-
-//        SynchedEntityData data = entityPlayer.getEntityData();
-//        data.set(EntityDataSerializers.BYTE.createAccessor(16), (byte) 127);
 
         TranslatableComponent joinMessage = getJoinMessage(entityPlayer);
 
@@ -78,27 +73,6 @@ public class Bot {
 
         serverLevel.addNewPlayer(entityPlayer);
         server.getPlayerList().players.add(entityPlayer);
-
-//        try {
-//            Field j = PlayerList.class.getDeclaredField("players");
-//            j.setAccessible(true);
-//            Object valJ = j.get(server.getPlayerList());
-//
-//            Method jPut = valJ.getClass().getDeclaredMethod("put", Object.class, Object.class);
-//            jPut.invoke(valJ, bukkitPlayer.getUniqueId(), entityPlayer);
-//
-//            Field playersByName = PlayerList.class.getDeclaredField("playersByName");
-//            playersByName.setAccessible(true);
-//            Object valPlayersByName = playersByName.get(server.getPlayerList());
-//
-//            Method playersByNamePut = valPlayersByName.getClass().getDeclaredMethod("put", Object.class, Object.class);
-//            playersByNamePut.invoke(valPlayersByName, entityPlayer.getName().getContents().toLowerCase(Locale.ROOT), entityPlayer);
-//
-//        } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-//            e.printStackTrace();
-//        }
-
-//        server.getPlayerList().placeNewPlayer(entityPlayer.connection.connection, entityPlayer);
 
         PlayerJoinEvent playerJoinEvent;
 
@@ -152,8 +126,6 @@ public class Bot {
 
         MinecraftServer mcServer = ((CraftServer) Bukkit.getServer()).getServer();
 
-        CraftServer craftServer = (CraftServer) Bukkit.getServer();
-
         ServerPlayer entityPlayer = (ServerPlayer) player.getEntityPlayer();
 
         ServerLevel worldServer = entityPlayer.getLevel().getWorld().getHandle();
@@ -175,27 +147,8 @@ public class Bot {
         }
 
         entityPlayer.unRide();
-//        worldServer.removePlayerImmediately(entityPlayer, Entity.RemovalReason.KILLED);
         entityPlayer.getAdvancements().stopListening();
         mcServer.getPlayerList().players.remove(entityPlayer);
-
-     /*   try {
-            Field j = PlayerList.class.getDeclaredField("players");
-            j.setAccessible(true);
-            Object valJ = j.get(mcServer.getPlayerList());
-
-            Method jRemove = valJ.getClass().getDeclaredMethod("remove", Object.class);
-            jRemove.invoke(valJ, entityPlayer.getUUID());
-
-            Field playersByName = PlayerList.class.getDeclaredField("playersByName");
-            playersByName.setAccessible(true);
-            Object valPlayersByName = playersByName.get(mcServer.getPlayerList());
-
-            Method playersByNameRemove = valPlayersByName.getClass().getDeclaredMethod("remove", Object.class);
-            playersByNameRemove.invoke(valPlayersByName, entityPlayer.getName().getContents().toLowerCase(Locale.ROOT));
-        } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
-        }*/
 
         mcServer.getPlayerList().remove(entityPlayer);
 
@@ -220,13 +173,7 @@ public class Bot {
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }
-
-
-
-
     }
-
-
     public static void setResourcePackStatus(CraftPlayer bukkitPlayer, PlayerResourcePackStatusEvent.Status status) {
         bukkitPlayer.setResourcePackStatus(status);
     }
