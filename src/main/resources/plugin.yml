@@ -1,0 +1,11 @@
+name: Fakeplayer
+version: '${version}'
+main: fakeplayer.FakePlayerPlugin
+api-version: 1.18
+commands:
+  bot:
+    description: Spawn
+    usage: /bot
+  remove:
+    description: kill bot
+    usage: /remove
