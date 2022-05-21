@@ -18,7 +18,7 @@ public class FakePlayerSummon implements CommandExecutor {
 
         UUID botID = FakePlayer.getFakePlayer(args[0]).getUUID();
 
-        Bukkit.getServer().dispatchCommand(sender, "tp " + botID + " " + sender.getName());
+        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "tp " + botID + " " + sender.getName());
 
         return true;
     }

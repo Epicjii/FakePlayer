@@ -47,7 +47,7 @@ public final class FakePlayerPlugin extends JavaPlugin {
         }
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
-            File cache = new File("plugins/FakePlayers/cache/cache");
+            File cache = new File("plugins/FakePlayers/data/fakeplayers");
             if (cache.exists()) {
                 try {
                     BufferedReader reader = new BufferedReader(new FileReader("plugins/FakePlayers/data/fakeplayers"));

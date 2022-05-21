@@ -117,7 +117,7 @@ public class Bot {
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(FakePlayerPlugin.getPlugin(), entityPlayer::tick, 1, 1);
 
-        Bukkit.broadcast(Component.text(entityPlayer.getUUID().toString()));
+        Bukkit.broadcast(Component.text("Bot Successfully Created"));
 
         return entityPlayer;
     }

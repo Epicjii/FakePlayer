@@ -6,9 +6,11 @@ commands:
   bot:
     description: Spawn
     usage: /bot
+    permission: op
   remove:
     description: kill bot
     usage: /remove
+    permission: op
   teleportbot:
     description: summons
     usage: /teleportbot
