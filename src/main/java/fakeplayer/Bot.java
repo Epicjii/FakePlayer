@@ -2,6 +2,7 @@ package fakeplayer;
 
 
 import com.destroystokyo.paper.PaperConfig;
+import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.mojang.authlib.GameProfile;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.embedded.EmbeddedChannel;
@@ -138,8 +139,6 @@ public class Bot {
 
         playerQuitEvent = paperQuitMessageFormat(craftPlayer, craftPlayer.getPlayer());
 
-        Bukkit.getPluginManager().callEvent(playerQuitEvent);
-
         entityPlayer.getBukkitEntity().disconnect(playerQuitEvent.quitMessage().toString());
 
         if (mcServer.isSameThread()) {
@@ -212,7 +211,6 @@ public class Bot {
 
         return chatMessage;
     }
-
     public static PlayerQuitEvent paperQuitMessageFormat(CraftPlayer entityPlayer, Player player) {
         return new PlayerQuitEvent(player.getPlayer(), Component.translatable("multiplayer.player.left", NamedTextColor.YELLOW, PaperConfig.useDisplayNameInQuit ? player.displayName() : Component.text(player.getName())), entityPlayer.getHandle().quitReason);
     }
