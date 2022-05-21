@@ -2,7 +2,6 @@ package fakeplayer;
 
 
 import com.destroystokyo.paper.PaperConfig;
-import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.mojang.authlib.GameProfile;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.embedded.EmbeddedChannel;
@@ -30,7 +29,10 @@ import org.bukkit.craftbukkit.v1_18_R2.CraftServer;
 import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import java.lang.reflect.Field;
@@ -173,6 +175,7 @@ public class Bot {
             e.printStackTrace();
         }
     }
+
     public static void setResourcePackStatus(CraftPlayer bukkitPlayer, PlayerResourcePackStatusEvent.Status status) {
         bukkitPlayer.setResourcePackStatus(status);
     }
@@ -211,6 +214,7 @@ public class Bot {
 
         return chatMessage;
     }
+
     public static PlayerQuitEvent paperQuitMessageFormat(CraftPlayer entityPlayer, Player player) {
         return new PlayerQuitEvent(player.getPlayer(), Component.translatable("multiplayer.player.left", NamedTextColor.YELLOW, PaperConfig.useDisplayNameInQuit ? player.displayName() : Component.text(player.getName())), entityPlayer.getHandle().quitReason);
     }
